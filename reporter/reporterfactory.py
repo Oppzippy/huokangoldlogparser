@@ -9,7 +9,10 @@ classMap = {
         "csv": CSVReporter,
         "json": JSONReporter,
     },
-    "weekly": {"text": TextWeeklyReporter},
+    "weekly": {
+        "text": TextWeeklyReporter,
+        "csv": CSVWeeklyReporter,
+    },
 }
 
 

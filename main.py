@@ -31,7 +31,7 @@ args = parser.parse_args()
 log = logparser.parse_log_file(args.file)
 try:
     reporter = ReporterFactory.create_reporter(args.type, args.format, log)
-    sys.stdout.write(reporter.generate_report())
+    print(reporter.generate_report())
 except UnimplementedReporterException as ex:
     print(ex.args[0])
     sys.exit(1)
