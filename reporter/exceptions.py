@@ -1,0 +1,2 @@
+class UnimplementedReporterException(Exception):
+    pass

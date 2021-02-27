@@ -1,10 +1,11 @@
 from functools import reduce
 from datetime import datetime, timedelta
 import dateutil.parser
+from .reporter import Reporter
 from abc import ABC, abstractmethod
 
 
-class WeeklyReporter(ABC):
+class WeeklyReporter(Reporter, ABC):
     def __init__(self, log: list):
         self._log = log
 

@@ -7,7 +7,7 @@ from .weeklyreporter import WeeklyReporter
 locale.setlocale(locale.LC_ALL, "")
 
 
-class HumanWeeklyReporter(WeeklyReporter):
+class TextWeeklyReporter(WeeklyReporter):
     def _get_time_filtered_report(
         self, startDate: datetime, gainByEvent: dict, lossByEvent: dict
     ):
@@ -41,7 +41,7 @@ class HumanWeeklyReporter(WeeklyReporter):
             f"Weekly Mail Gain: {self._format_gold(gainByEvent.get('MAIL_IN', 0))}"
         )
         report.append(
-            f"Weekly Mail Loss: {self._format_gold(gainByEvent.get('MAIL_OUT', 0))}"
+            f"Weekly Mail Loss: {self._format_gold(lossByEvent.get('MAIL_OUT', 0))}"
         )
         return "\n".join(report)
 
