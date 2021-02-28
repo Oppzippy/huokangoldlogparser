@@ -1,6 +1,7 @@
 import io
 import csv
 from datetime import datetime
+from typing import List
 from .weeklyreporter import WeeklyReporter
 
 
@@ -14,7 +15,7 @@ class CSVWeeklyReporter(WeeklyReporter):
             fieldnames=["Week", "Event", "Gain", "Loss"],
         )
         all_event_types = set(gain_by_event.keys())
-        all_event_types.union(loss_by_event.keys())
+        all_event_types.update(loss_by_event.keys())
         for event_type in all_event_types:
             writer.writerow(
                 {
@@ -26,7 +27,7 @@ class CSVWeeklyReporter(WeeklyReporter):
             )
         return output.getvalue()
 
-    def _merge_filtered_reports(self, reports: list[dict]):
+    def _merge_filtered_reports(self, reports: List[dict]):
         output = io.StringIO()
         writer = csv.DictWriter(
             output,

@@ -1,15 +1,18 @@
 from functools import reduce
 from datetime import datetime, timedelta
 import dateutil.parser
-from .reporter import Reporter
 from abc import ABC, abstractmethod
+from typing import List
+from .reporter import Reporter
 
 
 class WeeklyReporter(Reporter, ABC):
-    def __init__(self, log: list[dict]):
+    def __init__(self, log: List[dict]):
         self._log = log
 
     def generate_report(self) -> str:
+        if len(self._log) == 0:
+            return None
         first_date = dateutil.parser.isoparse(self._log[0]["timestamp"])
         last_date = dateutil.parser.isoparse(self._log[-1]["timestamp"])
         reports = []
@@ -43,7 +46,7 @@ class WeeklyReporter(Reporter, ABC):
         )
 
     @classmethod
-    def _gain_by_event_type(self, log: list[dict]):
+    def _gain_by_event_type(self, log: List[dict]):
         gain_by_event_type = {}
         for event in log:
             gain = event["newMoney"] - event["prevMoney"]
@@ -55,7 +58,7 @@ class WeeklyReporter(Reporter, ABC):
         return gain_by_event_type
 
     @classmethod
-    def _loss_by_event_type(self, log: list[dict]):
+    def _loss_by_event_type(self, log: List[dict]):
         loss_by_event_type = {}
         for event in log:
             loss = event["prevMoney"] - event["newMoney"]
@@ -80,7 +83,7 @@ def iterate_weeks(start: datetime, end: datetime):
         current = next
 
 
-def sum_change(log: list[dict]):
+def sum_change(log: List[dict]):
     return reduce(
         lambda acc, event: acc + (event["newMoney"] - event["prevMoney"]), log, 0
     )

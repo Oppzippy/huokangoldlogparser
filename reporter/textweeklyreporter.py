@@ -2,6 +2,7 @@ from functools import reduce
 import locale
 from datetime import date, datetime, time, timedelta
 import dateutil.parser
+from typing import List
 from .weeklyreporter import WeeklyReporter
 
 locale.setlocale(locale.LC_ALL, "")
@@ -12,7 +13,7 @@ class TextWeeklyReporter(WeeklyReporter):
         self, start_date: datetime, gain_by_event: dict, loss_by_event: dict
     ):
         report = []
-        report.append(f"**Week of {start_date.strftime('%B %d')}**")
+        report.append(f"**Week of {start_date.strftime('%B %d, %Y')}**")
         report.append(
             f"Weekly Total Gain: {self._format_gold(sum(gain_by_event.values()))}"
         )
@@ -49,5 +50,5 @@ class TextWeeklyReporter(WeeklyReporter):
         gold = copper / 10000
         return locale.format_string("%d", gold, grouping=True) + "g"
 
-    def _merge_filtered_reports(self, reports: list[str]):
+    def _merge_filtered_reports(self, reports: List[str]):
         return "\n\n".join(reports)
