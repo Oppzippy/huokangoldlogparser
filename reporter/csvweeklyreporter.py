@@ -26,7 +26,7 @@ class CSVWeeklyReporter(WeeklyReporter):
             )
         return output.getvalue()
 
-    def _merge_filtered_reports(self, reports: list):
+    def _merge_filtered_reports(self, reports: list[dict]):
         output = io.StringIO()
         writer = csv.DictWriter(
             output,

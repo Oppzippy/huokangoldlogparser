@@ -49,5 +49,5 @@ class TextWeeklyReporter(WeeklyReporter):
         gold = copper / 10000
         return locale.format_string("%d", gold, grouping=True) + "g"
 
-    def _merge_filtered_reports(self, reports: list):
+    def _merge_filtered_reports(self, reports: list[str]):
         return "\n\n".join(reports)

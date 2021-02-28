@@ -5,11 +5,11 @@ import json
 from .exceptions import ParserException
 
 
-def parse_log_file(file_path: str):
+def parse_log_file(file_path: str) -> list[dict]:
     return _decompress_log(_read_log_file(file_path))
 
 
-def _read_log_file(file_path: str) -> list:
+def _read_log_file(file_path: str) -> list[str]:
     with open(file_path, "r") as f:
         log = []
         reading_log = False
@@ -34,7 +34,7 @@ def _read_log_file_line(line: str) -> str:
     return match.group(1)
 
 
-def _decompress_log(log: list) -> list:
+def _decompress_log(log: list[str]) -> list[dict]:
     events = []
     for entry_b64 in log:
         entry_compressed = base64.b64decode(entry_b64)
