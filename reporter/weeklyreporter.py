@@ -10,15 +10,15 @@ class WeeklyReporter(Reporter, ABC):
         self._log = log
 
     def generate_report(self):
-        firstDate = dateutil.parser.isoparse(self._log[0]["timestamp"])
-        lastDate = dateutil.parser.isoparse(self._log[-1]["timestamp"])
+        first_date = dateutil.parser.isoparse(self._log[0]["timestamp"])
+        last_date = dateutil.parser.isoparse(self._log[-1]["timestamp"])
         reports = []
-        for (weekStart, weekEnd) in iterate_weeks(firstDate, lastDate):
-            filteredLog = self._get_time_filtered_log(weekStart, weekEnd)
-            gainByEvent = self._gain_by_event_type(filteredLog)
-            lossByEvent = self._loss_by_event_type(filteredLog)
+        for (week_start, week_end) in iterate_weeks(first_date, last_date):
+            filtered_log = self._get_time_filtered_log(week_start, week_end)
+            gain_by_event = self._gain_by_event_type(filtered_log)
+            loss_by_event = self._loss_by_event_type(filtered_log)
             reports.append(
-                self._get_time_filtered_report(weekStart, gainByEvent, lossByEvent)
+                self._get_time_filtered_report(week_start, gain_by_event, loss_by_event)
             )
         return self._merge_filtered_reports(reports)
 
@@ -28,39 +28,43 @@ class WeeklyReporter(Reporter, ABC):
 
     @abstractmethod
     def _get_time_filtered_report(
-        self, total: int, gainByEvent: dict, lossByEvent: dict
+        self, total: int, gain_by_event: dict, loss_by_event: dict
     ):
         pass
 
-    def _get_time_filtered_log(self, startDate: datetime, endDate: datetime):
+    def _get_time_filtered_log(self, start_date: datetime, end_date: datetime):
         return list(
             filter(
-                lambda event: startDate
+                lambda event: start_date
                 <= dateutil.parser.isoparse(event["timestamp"])
-                < endDate,
+                < end_date,
                 self._log,
             )
         )
 
     @classmethod
     def _gain_by_event_type(self, log: list):
-        gainByEventType = {}
+        gain_by_event_type = {}
         for event in log:
             gain = event["newMoney"] - event["prevMoney"]
-            eventType = event["type"]
+            event_type = event["type"]
             if gain > 0:
-                gainByEventType[eventType] = gainByEventType.get(eventType, 0) + gain
-        return gainByEventType
+                gain_by_event_type[event_type] = (
+                    gain_by_event_type.get(event_type, 0) + gain
+                )
+        return gain_by_event_type
 
     @classmethod
     def _loss_by_event_type(self, log: list):
-        lossByEventType = {}
+        loss_by_event_type = {}
         for event in log:
             loss = event["prevMoney"] - event["newMoney"]
-            eventType = event["type"]
+            event_type = event["type"]
             if loss > 0:
-                lossByEventType[eventType] = lossByEventType.get(eventType, 0) + loss
-        return lossByEventType
+                loss_by_event_type[event_type] = (
+                    loss_by_event_type.get(event_type, 0) + loss
+                )
+        return loss_by_event_type
 
 
 # Utility

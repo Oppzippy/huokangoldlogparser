@@ -12,17 +12,17 @@ def parse_log_file(file_path: str):
 def _read_log_file(file_path: str) -> list:
     with open(file_path, "r") as f:
         log = []
-        readingLog = False
+        reading_log = False
         for line in f:
             line = line.rstrip("\n")
             if line == "HuokanGoldLog = {":
-                readingLog = True
-            elif readingLog:
+                reading_log = True
+            elif reading_log:
                 if line == "}":
                     break
                 string = _read_log_file_line(line)
                 log.append(string)
-        if not readingLog:
+        if not reading_log:
             raise ParserException("File didn't contain a log.")
         return log
 

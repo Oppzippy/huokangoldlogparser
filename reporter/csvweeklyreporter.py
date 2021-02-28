@@ -6,22 +6,22 @@ from .weeklyreporter import WeeklyReporter
 
 class CSVWeeklyReporter(WeeklyReporter):
     def _get_time_filtered_report(
-        self, startDate: datetime, gainByEvent: dict, lossByEvent: dict
+        self, start_date: datetime, gain_by_event: dict, loss_by_event: dict
     ):
         output = io.StringIO()
         writer = csv.DictWriter(
             output,
             fieldnames=["Week", "Event", "Gain", "Loss"],
         )
-        allEventTypes = set(gainByEvent.keys())
-        allEventTypes.union(lossByEvent.keys())
-        for eventType in allEventTypes:
+        all_event_types = set(gain_by_event.keys())
+        all_event_types.union(loss_by_event.keys())
+        for event_type in all_event_types:
             writer.writerow(
                 {
-                    "Week": startDate.date().strftime("%Y-%m-%d"),
-                    "Event": eventType,
-                    "Gain": gainByEvent.get(eventType, 0),
-                    "Loss": lossByEvent.get(eventType, 0),
+                    "Week": start_date.date().strftime("%Y-%m-%d"),
+                    "Event": event_type,
+                    "Gain": gain_by_event.get(event_type, 0),
+                    "Loss": loss_by_event.get(event_type, 0),
                 }
             )
         return output.getvalue()

@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(
-    name="HuokanGoldLogger-Parser",
+    name="huokangoldlogparser",
     version="0.0.1",
     description="Parses gold logs produced by HuokanGoldLogger",
     author="Oppzippy",

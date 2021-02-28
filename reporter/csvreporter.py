@@ -12,14 +12,14 @@ class CSVReporter(Reporter):
         )
         writer.writeheader()
         for event in self._log:
-            moneyDiff = event["newMoney"] - event["prevMoney"]
+            money_diff = event["newMoney"] - event["prevMoney"]
             writer.writerow(
                 {
                     "Timestamp": event["timestamp"],
                     "Event": event["type"],
                     "Previous Money": event["prevMoney"],
                     "New Money": event["newMoney"],
-                    "Change": moneyDiff,
+                    "Change": money_diff,
                 }
             )
         return output.getvalue()
