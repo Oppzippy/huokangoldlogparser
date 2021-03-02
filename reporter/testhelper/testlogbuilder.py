@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 class TestLogBuilder:
@@ -24,7 +24,7 @@ class TestLogBuilder:
         self.offset = 0
 
     def _week_datetime(self, week: int):
-        start = datetime(2021, 1, 4)  # First monday of 2021
+        start = datetime(2021, 1, 4, tzinfo=timezone.utc)  # First monday of 2021
         if week >= 0:
             return start + timedelta(weeks=week)
         raise Exception("week must be >= 0")

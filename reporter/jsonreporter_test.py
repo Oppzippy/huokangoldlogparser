@@ -22,7 +22,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "LOOT",
                     "prevMoney": 50000000000,
                     "newMoney": 50000100000,
-                    "timestamp": "2021-01-04T00:00:00",
+                    "timestamp": "2021-01-04T00:00:00+00:00",
                 },
                 {
                     "character": {
@@ -32,7 +32,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "LOOT",
                     "prevMoney": 50000100000,
                     "newMoney": 50000250125,
-                    "timestamp": "2021-01-04T00:01:00",
+                    "timestamp": "2021-01-04T00:01:00+00:00",
                 },
                 {
                     "character": {
@@ -42,7 +42,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "AUCTION_HOUSE_SELL",
                     "prevMoney": 50000250125,
                     "newMoney": 51500250125,
-                    "timestamp": "2021-01-04T00:02:00",
+                    "timestamp": "2021-01-04T00:02:00+00:00",
                 },
                 {
                     "character": {
@@ -52,7 +52,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "AUCTION_HOUSE_COMMODITY_BUY",
                     "prevMoney": 51500250125,
                     "newMoney": 49500250125,
-                    "timestamp": "2021-01-04T00:03:00",
+                    "timestamp": "2021-01-04T00:03:00+00:00",
                 },
                 {
                     "character": {
@@ -62,7 +62,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "AUCTION_HOUSE_BID",
                     "prevMoney": 49500250125,
                     "newMoney": 49000250125,
-                    "timestamp": "2021-01-04T00:04:00",
+                    "timestamp": "2021-01-04T00:04:00+00:00",
                 },
                 {
                     "character": {
@@ -72,7 +72,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "TRADE",
                     "prevMoney": 49000250125,
                     "newMoney": 49000750125,
-                    "timestamp": "2021-01-04T00:05:00",
+                    "timestamp": "2021-01-04T00:05:00+00:00",
                 },
                 {
                     "character": {
@@ -82,7 +82,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "TRADE",
                     "prevMoney": 49000750125,
                     "newMoney": 49000250125,
-                    "timestamp": "2021-01-04T00:06:00",
+                    "timestamp": "2021-01-04T00:06:00+00:00",
                 },
                 {
                     "character": {
@@ -92,7 +92,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "GUILD_BANK_WITHDRAW",
                     "prevMoney": 49000250125,
                     "newMoney": 59000250125,
-                    "timestamp": "2021-01-04T00:07:00",
+                    "timestamp": "2021-01-04T00:07:00+00:00",
                 },
                 {
                     "character": {
@@ -102,7 +102,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "GUILD_BANK_DEPOSIT",
                     "prevMoney": 59000250125,
                     "newMoney": 54000250125,
-                    "timestamp": "2021-01-04T00:08:00",
+                    "timestamp": "2021-01-04T00:08:00+00:00",
                 },
                 {
                     "character": {
@@ -112,7 +112,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "MAIL_IN",
                     "prevMoney": 54000250125,
                     "newMoney": 54001005448,
-                    "timestamp": "2021-01-04T00:09:00",
+                    "timestamp": "2021-01-04T00:09:00+00:00",
                 },
                 {
                     "character": {
@@ -122,7 +122,7 @@ class JSONReporterTest(unittest.TestCase):
                     "type": "MAIL_OUT",
                     "prevMoney": 54001005448,
                     "newMoney": 54000505448,
-                    "timestamp": "2021-01-04T00:10:00",
+                    "timestamp": "2021-01-04T00:10:00+00:00",
                 },
             ],
         )
