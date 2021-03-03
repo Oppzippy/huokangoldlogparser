@@ -14,6 +14,6 @@ jobs:
       - name: Install pylint
         run: sudo apt-get install pylint
       - name: Run pylint
-        run: pylint .
+        run: pylint $(git ls-files "*.py")
       - name: Run tests
         run: ./test.sh
