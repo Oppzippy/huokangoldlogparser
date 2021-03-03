@@ -1,11 +1,9 @@
 from functools import reduce
-import locale
 from datetime import date, datetime, time, timedelta
 import dateutil.parser
 from typing import List
+from .goldformatter import format_gold
 from .weeklyreporter import WeeklyReporter
-
-locale.setlocale(locale.LC_ALL, "")
 
 
 class TextWeeklyReporter(WeeklyReporter):
@@ -14,41 +12,33 @@ class TextWeeklyReporter(WeeklyReporter):
     ):
         report = []
         report.append(f"**Week of {start_date.strftime('%B %d, %Y')}**")
+        report.append(f"Weekly Total Gain: {format_gold(sum(gain_by_event.values()))}")
+        report.append(f"Weekly Total Loss: {format_gold(sum(loss_by_event.values()))}")
         report.append(
-            f"Weekly Total Gain: {self._format_gold(sum(gain_by_event.values()))}"
+            f"Weekly AH Gain: {format_gold(gain_by_event.get('AUCTION_HOUSE_SELL', 0))}"
         )
         report.append(
-            f"Weekly Total Loss: {self._format_gold(sum(loss_by_event.values()))}"
+            f"Weekly AH Loss: {format_gold(loss_by_event.get('AUCTION_HOUSE_BID', 0) + loss_by_event.get('AUCTION_HOUSE_COMMODITY_BUY', 0))}"
         )
         report.append(
-            f"Weekly AH Gain: {self._format_gold(gain_by_event.get('AUCTION_HOUSE_SELL', 0))}"
+            f"Weekly Trade Gain: {format_gold(gain_by_event.get('TRADE', 0))}"
         )
         report.append(
-            f"Weekly AH Loss: {self._format_gold(loss_by_event.get('AUCTION_HOUSE_BID', 0) + loss_by_event.get('AUCTION_HOUSE_COMMODITY_BUY', 0))}"
+            f"Weekly Trade Loss: {format_gold(loss_by_event.get('TRADE', 0))}"
         )
         report.append(
-            f"Weekly Trade Gain: {self._format_gold(gain_by_event.get('TRADE', 0))}"
+            f"Weekly Guild Bank Withdraw: {format_gold(gain_by_event.get('GUILD_BANK_WITHDRAW', 0))}"
         )
         report.append(
-            f"Weekly Trade Loss: {self._format_gold(loss_by_event.get('TRADE', 0))}"
+            f"Weekly Guild Bank Deposit: {format_gold(loss_by_event.get('GUILD_BANK_DEPOSIT', 0))}"
         )
         report.append(
-            f"Weekly Guild Bank Withdraw: {self._format_gold(gain_by_event.get('GUILD_BANK_WITHDRAW', 0))}"
+            f"Weekly Mail Gain: {format_gold(gain_by_event.get('MAIL_IN', 0))}"
         )
         report.append(
-            f"Weekly Guild Bank Deposit: {self._format_gold(loss_by_event.get('GUILD_BANK_DEPOSIT', 0))}"
-        )
-        report.append(
-            f"Weekly Mail Gain: {self._format_gold(gain_by_event.get('MAIL_IN', 0))}"
-        )
-        report.append(
-            f"Weekly Mail Loss: {self._format_gold(loss_by_event.get('MAIL_OUT', 0))}"
+            f"Weekly Mail Loss: {format_gold(loss_by_event.get('MAIL_OUT', 0))}"
         )
         return "\n".join(report)
-
-    def _format_gold(self, copper: int):
-        gold = copper / 10000
-        return locale.format_string("%d", gold, grouping=True) + "g"
 
     def _merge_filtered_reports(self, reports: List[str]):
         return "\n\n".join(reports)

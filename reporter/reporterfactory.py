@@ -1,6 +1,7 @@
-from .jsonreporter import JSONReporter
-from .csvweeklyreporter import CSVWeeklyReporter
 from .csvreporter import CSVReporter
+from .jsonreporter import JSONReporter
+from .textreporter import TextReporter
+from .csvweeklyreporter import CSVWeeklyReporter
 from .textweeklyreporter import TextWeeklyReporter
 from .exceptions import UnimplementedReporterException
 
@@ -8,10 +9,11 @@ class_map = {
     "raw": {
         "csv": CSVReporter,
         "json": JSONReporter,
+        "text": TextReporter,
     },
     "weekly": {
-        "text": TextWeeklyReporter,
         "csv": CSVWeeklyReporter,
+        "text": TextWeeklyReporter,
     },
 }
 
