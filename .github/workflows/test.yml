@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: pip3 install -r requirements.txt
       - name: Install pylint
-        run: sudo apt-get install pylint
+        run: pip3 install pylint
       - name: Run pylint
         run: pylint **/*.py
       - name: Run tests
