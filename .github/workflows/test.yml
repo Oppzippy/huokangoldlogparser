@@ -12,8 +12,8 @@ jobs:
           python-version: 3.9
       - name: Set up en_US locale
         run: |
-          sudo update-locale "LANG=en_US.UTF-8"
           sudo locale-gen --purge "en_US.UTF-8"
+          sudo update-locale "LANG=en_US.UTF-8"
           EXPORT LANG=en_US.UTF-8
       - name: Install dependencies
         run: pip3 install -r requirements.txt
