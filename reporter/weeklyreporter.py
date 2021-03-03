@@ -74,14 +74,14 @@ class WeeklyReporter(Reporter, ABC):
 # Utility
 
 
-def iterate_weeks(start: datetime, end: datetime):
-    start = start - timedelta(start.weekday())
-    start = start.replace(hour=0, minute=0, second=0, microsecond=0)
-    current = start
-    while current <= end:
-        next = current + timedelta(weeks=1)
-        yield (current, next)
-        current = next
+def iterate_weeks(start_date: datetime, end: datetime):
+    start_date = start_date - timedelta(start_date.weekday())
+    start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    current_date = start_date
+    while current_date <= end:
+        next_date = current_date + timedelta(weeks=1)
+        yield (current_date, next_date)
+        current_date = next_date
 
 
 def sum_change(log: List[dict]):

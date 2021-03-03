@@ -5,7 +5,7 @@ from .csvweeklyreporter import CSVWeeklyReporter
 from .textweeklyreporter import TextWeeklyReporter
 from .exceptions import UnimplementedReporterException
 
-class_map = {
+CLASS_MAP = {
     "raw": {
         "csv": CSVReporter,
         "json": JSONReporter,
@@ -20,9 +20,9 @@ class_map = {
 
 class ReporterFactory:
     @classmethod
-    def create_reporter(cls, type: str, format: str, log: list):
-        if type in class_map and format in class_map[type]:
-            return class_map[type][format](log)
+    def create_reporter(cls, type_: str, format_: str, log: list):
+        if type_ in CLASS_MAP and format_ in CLASS_MAP[type_]:
+            return CLASS_MAP[type_][format_](log)
         raise UnimplementedReporterException(
-            f"Reporter of type {type} and format {format} is not implemented."
+            f"Reporter of type {type_} and format {format_} is not implemented."
         )

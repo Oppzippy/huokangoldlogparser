@@ -11,10 +11,10 @@ def parse_log_file(file_path: str) -> List[dict]:
 
 
 def _read_log_file(file_path: str) -> List[str]:
-    with open(file_path, "r") as f:
+    with open(file_path, "r") as file_:
         log = []
         reading_log = False
-        for line in f:
+        for line in file_:
             line = line.rstrip("\n")
             if line == "HuokanGoldLog = {":
                 reading_log = True
