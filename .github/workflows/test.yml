@@ -12,6 +12,7 @@ jobs:
           python-version: 3.9
       - name: Set up en_US locale
         run: |
+          sudo apt-get install locales tzdata
           sudo locale-gen --purge "en_US.UTF-8"
           sudo update-locale "LANG=en_US.UTF-8"
           export LANG=en_US.UTF-8
