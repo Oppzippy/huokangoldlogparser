@@ -41,9 +41,12 @@ jobs:
           pip3 install build
       - name: Build
         run: python3 -m build
+      - name: Generate changelog
+        run: git log $(git describe --abbrev=0 --tags)..HEAD --oneline --pretty="- %s" > CHANGELOG.md
       - name: Upload
         uses: softprops/action-gh-release@v1
         with:
+          body_path: CHANGELOG.md
           files:
             dist/*
         env:
