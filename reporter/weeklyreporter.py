@@ -1,13 +1,14 @@
 from functools import reduce
 from datetime import datetime, timedelta
-import dateutil.parser
 from abc import ABC, abstractmethod
 from typing import List
+import dateutil.parser
 from .reporter import Reporter
 
 
 class WeeklyReporter(Reporter, ABC):
     def __init__(self, log: List[dict]):
+        super().__init__(log)
         self._log = log
 
     def generate_report(self) -> str:
@@ -31,7 +32,7 @@ class WeeklyReporter(Reporter, ABC):
 
     @abstractmethod
     def _get_time_filtered_report(
-        self, total: int, gain_by_event: dict, loss_by_event: dict
+        self, start_date: datetime, gain_by_event: dict, loss_by_event: dict
     ):
         pass
 
@@ -46,7 +47,7 @@ class WeeklyReporter(Reporter, ABC):
         )
 
     @classmethod
-    def _gain_by_event_type(self, log: List[dict]):
+    def _gain_by_event_type(cls, log: List[dict]):
         gain_by_event_type = {}
         for event in log:
             gain = event["newMoney"] - event["prevMoney"]
@@ -58,7 +59,7 @@ class WeeklyReporter(Reporter, ABC):
         return gain_by_event_type
 
     @classmethod
-    def _loss_by_event_type(self, log: List[dict]):
+    def _loss_by_event_type(cls, log: List[dict]):
         loss_by_event_type = {}
         for event in log:
             loss = event["prevMoney"] - event["newMoney"]

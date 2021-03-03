@@ -1,6 +1,4 @@
-from functools import reduce
-from datetime import date, datetime, time, timedelta
-import dateutil.parser
+from datetime import datetime
 from typing import List
 from .goldformatter import format_gold
 from .weeklyreporter import WeeklyReporter

@@ -4,8 +4,11 @@ from .testhelper import create_test_log
 
 
 class TextReporterTest(unittest.TestCase):
-    def testReport(self):
-        self.maxDiff = None
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.max_diff = None
+
+    def test_report(self):
         log = create_test_log()
         reporter = TextReporter(log)
         report = reporter.generate_report()

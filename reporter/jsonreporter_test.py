@@ -5,8 +5,11 @@ from .testhelper import create_test_log
 
 
 class JSONReporterTest(unittest.TestCase):
-    def testReport(self):
-        self.maxDiff = None
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.max_diff = None
+
+    def test_report(self):
         log = create_test_log()
         reporter = JSONReporter(log)
         report = reporter.generate_report()

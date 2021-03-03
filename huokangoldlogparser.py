@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 
-import sys, os, io, re
-import base64
-import zlib
-import json
+import sys
+import os
 import argparse
-import csv
-from datetime import date, datetime, time, timedelta
-import dateutil.parser
 import logparser
 from reporter import ReporterFactory, UnimplementedReporterException
 

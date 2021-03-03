@@ -1,9 +1,8 @@
 import unittest
 import tempfile
-import os
 from .parser import parse_log_file
 
-uncompressed_gold_log = """
+UNCOMPRESSED_GOLD_LOG = """
 HuokanGoldLog = {
 	"TczNCsIwEATgd9lzhSSatMkbCEouPXlb6qKF/BGDEkrf3fUmzGnm292gVHpfc6IOzipxtFIbqacBWi8EDi7ezzBAos8/MpMctWW0Rno1jIWlEkoeBOc0K+Xk6IS58eXyxIpLowpug4Tx99SX0nPIj857JQyRu3MI6x0T7Pv3", -- [1]
 	"VYzLCsIwEEX/ZdYV0rRak50iSPG1sRs3MtRBC3kRgxJK/93RnXBW9557RwiRXgfvKINWUlRqsSybuSog5UCgYdu1+811vTruoABH7z+1EfKnDpaeCW1gXwpZzgRTn2Wla8VceNk/MGKfKIIewaH9Xp9CyN74e+Y+EhrLWWvMcEMH0/T5", -- [2]
@@ -14,13 +13,13 @@ HuokanGoldLog = {
 class ParserTest(unittest.TestCase):
     def setUp(self):
         self.file = tempfile.NamedTemporaryFile("w")
-        self.file.write(uncompressed_gold_log)
+        self.file.write(UNCOMPRESSED_GOLD_LOG)
         self.file.flush()
 
     def tearDown(self):
         self.file.close()
 
-    def testParseUncompressedLog(self):
+    def test_parse_uncompressed_log(self):
         log = parse_log_file(self.file.name)
         self.assertDictEqual(
             {
@@ -43,5 +42,5 @@ class ParserTest(unittest.TestCase):
             log[1],
         )
 
-    def testParseMixedCompressionLog(self):
+    def test_parse_mixed_compression_log(self):
         pass

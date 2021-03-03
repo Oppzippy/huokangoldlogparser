@@ -9,12 +9,12 @@ class TestLogBuilder:
     def create_event(self, type: str, change: int):
         timestamp = self.datetime + timedelta(minutes=self.offset)
         self.offset += 1
-        prevMoney = self.money
+        prev_money = self.money
         self.money += change
         return {
             "character": {"name": "Testname", "realm": "Testrealm"},
             "type": type,
-            "prevMoney": prevMoney,
+            "prevMoney": prev_money,
             "newMoney": self.money,
             "timestamp": timestamp.isoformat(),
         }

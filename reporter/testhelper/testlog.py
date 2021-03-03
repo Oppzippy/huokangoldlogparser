@@ -1,5 +1,5 @@
-from .testlogbuilder import TestLogBuilder
 from typing import List
+from .testlogbuilder import TestLogBuilder
 
 
 def create_test_log() -> List[dict]:
