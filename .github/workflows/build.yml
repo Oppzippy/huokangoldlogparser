@@ -25,48 +25,6 @@ jobs:
         run: pylint **/*.py
       - name: Run tests
         run: bash test.sh
-  
-  windows:
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/')
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install build
-      - name: Build
-        run: python -m build
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: Windows
-          path: dist
-  
-  macos:
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/')
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install build
-      - name: Build
-        run: python -m build
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: MacOS
-          path: dist
 
   linux:
     needs: test
@@ -84,8 +42,10 @@ jobs:
       - name: Build
         run: python3 -m build
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: softprops/action-gh-release@v1
         with:
-          name: Linux
-          path: dist
+          files:
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
