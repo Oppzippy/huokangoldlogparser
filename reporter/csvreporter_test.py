@@ -6,7 +6,8 @@ from .testhelper import create_test_log
 class CSVReporterTest(unittest.TestCase):
     def __init__(self, *args):
         super().__init__(*args)
-        self.max_diff = None
+        # pylint: disable=invalid-name
+        self.maxDiff = None
 
     def test_report(self):
         log = create_test_log()
