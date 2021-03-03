@@ -2,11 +2,10 @@ name: Test
 
 on: [push]
 
-env:
-  LANG: "en_US.UTF-8"
-
 jobs:
   test:
+    env:
+      LANG: "en_US.UTF-8"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
