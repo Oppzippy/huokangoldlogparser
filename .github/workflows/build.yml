@@ -31,6 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v2
         with:
           python-version: 3.9
@@ -41,7 +43,7 @@ jobs:
       - name: Build
         run: python3 -m build
       - name: Generate changelog
-        run: git log $(git describe --abbrev=0 --tags $(git describe --abbrev=0 --tags)^)..HEAD --oneline --pretty="- %s" > CHANGELOG.md
+        run: git log $(git describe --always --abbrev=0 --tags $(git describe --abbrev=0 --tags --always)^)..HEAD --oneline --pretty="- %s" > CHANGELOG.md
       - name: Upload
         uses: softprops/action-gh-release@v1
         with:
