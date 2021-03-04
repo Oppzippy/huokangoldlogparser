@@ -14,9 +14,9 @@ class JSONReporterTest(unittest.TestCase):
         log = create_test_log()
         reporter = JSONReporter(log)
         report = reporter.generate_report()
-        parsed_log = json.loads(report)
+        parsed_report = json.loads(report)
         self.assertListEqual(
-            parsed_log,
+            parsed_report,
             [
                 {
                     "character": {

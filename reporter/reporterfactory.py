@@ -2,6 +2,7 @@ from .csvreporter import CSVReporter
 from .jsonreporter import JSONReporter
 from .textreporter import TextReporter
 from .csvweeklyreporter import CSVWeeklyReporter
+from .jsonweeklyreporter import JSONWeeklyReporter
 from .textweeklyreporter import TextWeeklyReporter
 from .exceptions import UnimplementedReporterException
 
@@ -13,6 +14,7 @@ CLASS_MAP = {
     },
     "weekly": {
         "csv": CSVWeeklyReporter,
+        "json": JSONWeeklyReporter,
         "text": TextWeeklyReporter,
     },
 }
