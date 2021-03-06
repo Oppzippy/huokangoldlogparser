@@ -10,6 +10,12 @@ class JSONWeeklyReporterTest(unittest.TestCase):
         # pylint: disable=invalid-name
         self.maxDiff = None
 
+    def test_empty_report(self):
+        reporter = JSONWeeklyReporter([])
+        report = reporter.generate_report()
+        parsed_report = json.loads(report)
+        self.assertListEqual(parsed_report, [])
+
     def test_report(self):
         log = create_test_log()
         reporter = JSONWeeklyReporter(log)

@@ -9,6 +9,11 @@ class CSVWeeklyReporterTest(unittest.TestCase):
         # pylint: disable=invalid-name
         self.maxDiff = None
 
+    def test_empty_report(self):
+        reporter = CSVWeeklyReporter([])
+        report = reporter.generate_report()
+        self.assertEqual(report, "Week,Event,Gain,Loss")
+
     def test_report(self):
         log = create_test_log()
         reporter = CSVWeeklyReporter(log)

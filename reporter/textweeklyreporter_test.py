@@ -9,6 +9,11 @@ class TextWeeklyReporterTest(unittest.TestCase):
         # pylint: disable=invalid-name
         self.maxDiff = None
 
+    def test_empty_report(self):
+        reporter = TextWeeklyReporter([])
+        report = reporter.generate_report()
+        self.assertEqual(report, "The report is empty.")
+
     def test_report(self):
         log = create_test_log()
         reporter = TextWeeklyReporter(log)
