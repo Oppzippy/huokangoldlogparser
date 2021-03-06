@@ -14,7 +14,8 @@ def main():
     parser.add_argument(
         "-i",
         "--input",
-        nargs="+",
+        action="append",
+        required=True,
         type=lambda file: file
         if os.path.isfile(file)
         else parser.error("The specified file does not exist."),
