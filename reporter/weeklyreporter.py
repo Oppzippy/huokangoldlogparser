@@ -11,8 +11,6 @@ class WeeklyReporter(Reporter, ABC):
         self._log = log
 
     def generate_report(self) -> str:
-        if len(self._log) == 0:
-            return None
         reports = []
         for filtered_log in self._weekly_logs():
             week_start = _first_day_of_week(

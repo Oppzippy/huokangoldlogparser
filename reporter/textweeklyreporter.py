@@ -42,4 +42,6 @@ class TextWeeklyReporter(WeeklyReporter):
         return "\n".join(report)
 
     def _merge_filtered_reports(self, reports: List[str]):
+        if len(reports) == 0:
+            return "The report is empty."
         return "\n\n".join(reports)
