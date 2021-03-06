@@ -7,7 +7,7 @@ from reporter import ReporterFactory, UnimplementedReporterException
 
 def main():
     parser = argparse.ArgumentParser(
-        usage="huokangoldlogparser.py -i HuokanGoldLogger.lua"
+        usage="huokangoldlogparser.py -i !HuokanGoldLogger.lua"
     )
     parser.add_argument(
         "-i",
