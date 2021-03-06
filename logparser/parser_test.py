@@ -1,6 +1,6 @@
 import unittest
 import tempfile
-from .parser import parse_log_file
+from .parser import merge_logs, parse_log_file
 from .exceptions import ParserException
 
 EMPTY_GOLD_LOG = """
@@ -92,4 +92,44 @@ class ParserTest(unittest.TestCase):
     def test_parse_empty_file(self):
         self.assertRaises(
             ParserException, lambda: parse_log_file(self._empty_file.name)
+        )
+
+    def test_merge_logs(self):
+        first_log = [
+            {
+                "character": {"name": "Oppyology", "realm": "Illidan"},
+                "type": "LOOT",
+                "prevMoney": 92039156158,
+                "newMoney": 92039681759,
+                "timestamp": "2021-01-04T22:17:06Z",
+            }
+        ]
+        second_log = [
+            {
+                "character": {"name": "Oppyology", "realm": "Illidan"},
+                "type": "GUILD_BANK",
+                "prevMoney": 92039681759,
+                "newMoney": 92039670259,
+                "timestamp": "2021-01-04T23:49:49Z",
+            },
+        ]
+        merged_log = merge_logs([first_log, second_log])
+        self.assertListEqual(
+            merged_log,
+            [
+                {
+                    "character": {"name": "Oppyology", "realm": "Illidan"},
+                    "type": "LOOT",
+                    "prevMoney": 92039156158,
+                    "newMoney": 92039681759,
+                    "timestamp": "2021-01-04T22:17:06Z",
+                },
+                {
+                    "character": {"name": "Oppyology", "realm": "Illidan"},
+                    "type": "GUILD_BANK",
+                    "prevMoney": 92039681759,
+                    "newMoney": 92039670259,
+                    "timestamp": "2021-01-04T23:49:49Z",
+                },
+            ],
         )
