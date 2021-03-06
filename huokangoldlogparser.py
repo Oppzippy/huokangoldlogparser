@@ -15,13 +15,18 @@ def main():
         "-i",
         "--input",
         action="append",
+        help="Input file path. If more than one is supplied using -i more than once, all supplied logs will be merged.",
         required=True,
         type=lambda file: file
         if os.path.isfile(file)
         else parser.error("The specified file does not exist."),
     )
     parser.add_argument(
-        "-o", "--output", type=argparse.FileType("w"), default=sys.stdout
+        "-o",
+        "--output",
+        type=argparse.FileType("w"),
+        default=sys.stdout,
+        help="Output file path. If not specified, output will go to stdout by default.",
     )
     parser.add_argument(
         "-f",
