@@ -11,6 +11,8 @@ setup(
     author_email="oppzippy@gmail.com",
     license="UNLICENSED",
     packages=setuptools.find_packages(),
-    scripts=["huokangoldlogparser.py"],
     install_requires=["python-dateutil"],
+    entry_points={
+        "console_scripts": ["huokangoldlogparser=cli.huokangoldlogparser:main"]
+    },
 )
