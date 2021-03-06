@@ -26,5 +26,6 @@ class TextReporterTest(unittest.TestCase):
 2021-01-04T00:07:00+00:00: Testname-Testrealm gained 1,000,000g from GUILD_BANK_WITHDRAW.
 2021-01-04T00:08:00+00:00: Testname-Testrealm lost 500,000g from GUILD_BANK_DEPOSIT.
 2021-01-04T00:09:00+00:00: Testname-Testrealm gained 75g from MAIL_IN.
-2021-01-04T00:10:00+00:00: Testname-Testrealm lost 50g from MAIL_OUT.""",
+2021-01-04T00:10:00+00:00: Testname-Testrealm lost 50g from MAIL_OUT.
+2021-01-25T00:00:00+00:00: Testname-Testrealm lost 10,000g from BMAH_BID.""",
         )

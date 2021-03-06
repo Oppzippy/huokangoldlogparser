@@ -18,5 +18,7 @@ def create_test_log() -> List[dict]:
         builder.create_event("MAIL_IN", change=75_53_23),
         builder.create_event("MAIL_OUT", change=-50_00_00),
     ]
+    builder.set_week(3)
+    log.extend([builder.create_event("BMAH_BID", change=-10_000_00_00)])
 
     return log

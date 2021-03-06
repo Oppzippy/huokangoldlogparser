@@ -29,6 +29,7 @@ class CSVWeeklyReporterTest(unittest.TestCase):
                     "2021-01-04,GUILD_BANK_DEPOSIT,0,5000000000",
                     "2021-01-04,MAIL_IN,755323,0",
                     "2021-01-04,MAIL_OUT,0,500000",
+                    "2021-01-25,BMAH_BID,0,100000000",
                 ]
             ),
         )

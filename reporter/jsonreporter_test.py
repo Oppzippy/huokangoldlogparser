@@ -128,5 +128,15 @@ class JSONReporterTest(unittest.TestCase):
                     "newMoney": 54000505448,
                     "timestamp": "2021-01-04T00:10:00+00:00",
                 },
+                {
+                    "character": {
+                        "name": "Testname",
+                        "realm": "Testrealm",
+                    },
+                    "type": "BMAH_BID",
+                    "prevMoney": 54000505448,
+                    "newMoney": 53900505448,
+                    "timestamp": "2021-01-25T00:00:00+00:00",
+                },
             ],
         )

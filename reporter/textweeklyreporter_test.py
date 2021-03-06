@@ -26,5 +26,17 @@ Weekly Trade Loss: 50g
 Weekly Guild Bank Withdraw: 1,000,000g
 Weekly Guild Bank Deposit: 500,000g
 Weekly Mail Gain: 75g
-Weekly Mail Loss: 50g""",
+Weekly Mail Loss: 50g
+
+**Week of January 25, 2021**
+Weekly Total Gain: 0g
+Weekly Total Loss: 0g
+Weekly AH Gain: 0g
+Weekly AH Loss: 10,000g
+Weekly Trade Gain: 0g
+Weekly Trade Loss: 0g
+Weekly Guild Bank Withdraw: 0g
+Weekly Guild Bank Deposit: 0g
+Weekly Mail Gain: 0g
+Weekly Mail Loss: 0g""",
         )

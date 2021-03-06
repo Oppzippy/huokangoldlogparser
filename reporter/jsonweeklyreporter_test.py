@@ -59,5 +59,14 @@ class JSONWeeklyReporterTest(unittest.TestCase):
                         },
                     },
                 },
+                {
+                    "weekStartTimestamp": "2021-01-25T00:00:00+00:00",
+                    "report": {
+                        "BMAH_BID": {
+                            "gain": 0,
+                            "loss": 100000000,
+                        },
+                    },
+                },
             ],
         )
