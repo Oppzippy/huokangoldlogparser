@@ -4,7 +4,8 @@ from .parser import parse_log_file
 from .exceptions import ParserException
 
 EMPTY_GOLD_LOG = """
-HuokanGoldLog = {}
+HuokanGoldLog = {
+}
 """
 
 UNCOMPRESSED_GOLD_LOG = """
