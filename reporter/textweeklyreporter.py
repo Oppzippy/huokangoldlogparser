@@ -19,7 +19,7 @@ class TextWeeklyReporter(WeeklyReporter):
             f"""Weekly AH Loss: {
                 format_gold(loss_by_event.get('AUCTION_HOUSE_BID', 0)
                 + loss_by_event.get('AUCTION_HOUSE_COMMODITY_BUY', 0)
-                + loss_by_event.get('BMAH_BID'))}"""
+                + loss_by_event.get('BMAH_BID', 0))}"""
         )
         report.append(
             f"Weekly Trade Gain: {format_gold(gain_by_event.get('TRADE', 0))}"
