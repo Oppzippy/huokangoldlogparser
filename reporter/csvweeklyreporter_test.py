@@ -12,7 +12,7 @@ class CSVWeeklyReporterTest(unittest.TestCase):
     def test_empty_report(self):
         reporter = CSVWeeklyReporter([])
         report = reporter.generate_report()
-        self.assertEqual(report, "Week,Event,Gain,Loss")
+        self.assertEqual(report, "Week,Event,Gain,Loss\n")
 
     def test_report(self):
         log = create_test_log()

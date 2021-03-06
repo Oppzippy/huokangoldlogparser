@@ -9,10 +9,9 @@ class CSVWeeklyReporter(WeeklyReporter):
     def _get_time_filtered_report(
         self, start_date: datetime, gain_by_event: dict, loss_by_event: dict
     ):
-        output = io.StringIO()
+        output = io.StringIO(newline="")
         writer = csv.DictWriter(
-            output,
-            fieldnames=["Week", "Event", "Gain", "Loss"],
+            output, fieldnames=["Week", "Event", "Gain", "Loss"], lineterminator="\n"
         )
         all_event_types = set(gain_by_event.keys())
         all_event_types.update(loss_by_event.keys())
@@ -30,8 +29,7 @@ class CSVWeeklyReporter(WeeklyReporter):
     def _merge_filtered_reports(self, reports: List[dict]):
         output = io.StringIO()
         writer = csv.DictWriter(
-            output,
-            fieldnames=["Week", "Event", "Gain", "Loss"],
+            output, fieldnames=["Week", "Event", "Gain", "Loss"], lineterminator="\n"
         )
         writer.writeheader()
         header = output.getvalue()
