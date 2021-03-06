@@ -24,7 +24,7 @@ def _read_log_file(file_path: str) -> List[str]:
         reading_log = False
         for line in file_:
             line = line.rstrip("\n")
-            if line == "HuokanGoldLog = {":
+            if line.startswith("HuokanGoldLog = {"):
                 reading_log = True
             elif reading_log:
                 if line == "}":
