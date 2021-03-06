@@ -30,7 +30,7 @@ Weekly Mail Loss: 50g
 
 **Week of January 25, 2021**
 Weekly Total Gain: 0g
-Weekly Total Loss: 0g
+Weekly Total Loss: 10,000g
 Weekly AH Gain: 0g
 Weekly AH Loss: 10,000g
 Weekly Trade Gain: 0g
