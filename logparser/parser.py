@@ -2,8 +2,16 @@ import re
 import zlib
 import base64
 import json
-from typing import List
+from typing import Iterable, List
+import dateutil.parser
 from .exceptions import ParserException
+
+
+def merge_logs(logs: Iterable[List[dict]]):
+    unsorted_log = (event for log in logs for event in log)
+    return sorted(
+        unsorted_log, key=lambda event: dateutil.parser.isoparse(event["timestamp"])
+    )
 
 
 def parse_log_file(file_path: str) -> List[dict]:
