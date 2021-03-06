@@ -14,15 +14,11 @@ class WeeklyReporter(Reporter, ABC):
     def generate_report(self) -> str:
         if len(self._log) == 0:
             return None
-        first_date = dateutil.parser.isoparse(self._log[0]["timestamp"])
-        last_date = dateutil.parser.isoparse(self._log[-1]["timestamp"])
         reports = []
-        # TODO improve performance
-        # We're currently filtering the entire log for every individual week
-        # Since the log is sorted, we only need to look at what comes after the previous
-        # end index.
-        for (week_start, week_end) in iterate_weeks(first_date, last_date):
-            filtered_log = self._get_time_filtered_log(week_start, week_end)
+        for filtered_log in self._weekly_logs():
+            week_start = _first_day_of_week(
+                dateutil.parser.isoparse(filtered_log[0]["timestamp"])
+            )
             gain_by_event = self._gain_by_event_type(filtered_log)
             loss_by_event = self._loss_by_event_type(filtered_log)
             reports.append(
@@ -40,15 +36,23 @@ class WeeklyReporter(Reporter, ABC):
     ):
         pass
 
-    def _get_time_filtered_log(self, start_date: datetime, end_date: datetime):
-        return list(
-            filter(
-                lambda event: start_date
-                <= dateutil.parser.isoparse(event["timestamp"])
-                < end_date,
-                self._log,
-            )
+    def _weekly_logs(self):
+        if len(self._log) == 0:
+            return
+        # The log is sorted so we know there will be no more relevant entries
+        # after we find one outside of our target time period
+        current_end = _last_day_of_week(
+            dateutil.parser.isoparse(self._log[0]["timestamp"])
         )
+        start_index = 0
+        for i in range(1, len(self._log)):
+            event = self._log[i]
+            timestamp = dateutil.parser.isoparse(event["timestamp"])
+            if timestamp >= current_end:
+                yield self._log[start_index:i]
+                current_end = _last_day_of_week(timestamp)
+                start_index = i
+        yield self._log[start_index:]
 
     @classmethod
     def _gain_by_event_type(cls, log: List[dict]):
@@ -78,17 +82,11 @@ class WeeklyReporter(Reporter, ABC):
 # Utility
 
 
-def iterate_weeks(start_date: datetime, end: datetime):
-    start_date = start_date - timedelta(start_date.weekday())
-    start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
-    current_date = start_date
-    while current_date <= end:
-        next_date = current_date + timedelta(weeks=1)
-        yield (current_date, next_date)
-        current_date = next_date
+def _first_day_of_week(day: datetime):
+    first_day = day - timedelta(day.weekday())
+    return first_day.replace(hour=0, minute=0, second=0, microsecond=0)
 
 
-def sum_change(log: List[dict]):
-    return reduce(
-        lambda acc, event: acc + (event["newMoney"] - event["prevMoney"]), log, 0
-    )
+def _last_day_of_week(day: datetime):
+    first_day = _first_day_of_week(day)
+    return first_day + timedelta(weeks=1)
