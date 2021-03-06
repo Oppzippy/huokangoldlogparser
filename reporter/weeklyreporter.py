@@ -1,4 +1,3 @@
-from functools import reduce
 from datetime import datetime, timedelta
 from abc import ABC, abstractmethod
 from typing import List
