@@ -17,6 +17,10 @@ class WeeklyReporter(Reporter, ABC):
         first_date = dateutil.parser.isoparse(self._log[0]["timestamp"])
         last_date = dateutil.parser.isoparse(self._log[-1]["timestamp"])
         reports = []
+        # TODO improve performance
+        # We're currently filtering the entire log for every individual week
+        # Since the log is sorted, we only need to look at what comes after the previous
+        # end index.
         for (week_start, week_end) in iterate_weeks(first_date, last_date):
             filtered_log = self._get_time_filtered_log(week_start, week_end)
             gain_by_event = self._gain_by_event_type(filtered_log)
