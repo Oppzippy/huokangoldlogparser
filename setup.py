@@ -5,7 +5,7 @@ import setuptools
 
 setup(
     name="huokangoldlogparser",
-    version="1.0.1",
+    version="1.1.0",
     description="Parses gold logs produced by HuokanGoldLogger",
     author="Oppzippy",
     author_email="oppzippy@gmail.com",
