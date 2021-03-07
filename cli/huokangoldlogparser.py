@@ -34,12 +34,21 @@ def main():
         default="json",
     )
     parser.add_argument(
+        "--filter",
+        type=str,
+        help="Filter specific event types (MAIL_IN for example).",
+        required=False,
+        nargs="+",
+    )
+    parser.add_argument(
         "-t", "--type", type=str, choices=["raw", "weekly"], default="raw"
     )
     args = parser.parse_args()
 
     logs = map(lambda file: logparser.parse_log_file(file), args.input)
     log = logparser.merge_logs(logs)
+    if args.filter:
+        log = list(filter(lambda event: event["type"] in args.filter, log))
     try:
         reporter = ReporterFactory.create_reporter(args.type, args.format, log)
         args.output.write(reporter.generate_report())
