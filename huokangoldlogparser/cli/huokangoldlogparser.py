@@ -1,8 +1,8 @@
 import sys
 import os
 import argparse
-import logparser
-from reporter import ReporterFactory, UnimplementedReporterException
+from huokangoldlogparser import logparser
+from huokangoldlogparser.reporter import ReporterFactory, UnimplementedReporterException
 
 
 def main():

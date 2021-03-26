@@ -13,6 +13,8 @@ setup(
     packages=setuptools.find_packages(),
     install_requires=["python-dateutil"],
     entry_points={
-        "console_scripts": ["huokangoldlogparser=cli.huokangoldlogparser:main"]
+        "console_scripts": [
+            "huokangoldlogparser=huokangoldlogparser.cli.huokangoldlogparser:main"
+        ]
     },
 )
