@@ -57,3 +57,7 @@ def main():
         sys.stderr.write(ex.args[0])
         sys.stderr.write("\n")
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
